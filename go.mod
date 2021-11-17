@@ -1,17 +1,12 @@
 module qbtsh
 
-go 1.17
+go 1.16
 
 require (
 	gek_exec v0.0.0
 	gek_file v0.0.0
 	gek_service v0.0.0
 	gek_toolbox v0.0.0
-)
-
-require (
-	gek_github v0.0.0 // indirect
-	gek_json v0.0.0 // indirect
 )
 
 replace (

@@ -103,13 +103,13 @@ func main() {
 	if cliUninstall {
 		err := uninstall()
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}
 	if cliReload {
 		err := reload()
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}
 }

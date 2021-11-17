@@ -142,10 +142,19 @@ func downloadApp(repo string, repoList map[string]string) (err error) {
 		return err
 	}
 	// 建立临时文件夹
+	// 已经存在就删除重建
+	exist, _, _ := gek_file.Exist(tempLocation)
+	if exist {
+		err = gek_exec.Run("rm -rf " + tempLocation)
+		if err != nil {
+			return err
+		}
+	}
 	err = gek_file.CreateDir(tempLocation)
 	if err != nil {
 		return err
 	}
+
 	// 获取下载链接
 	downloadLink, err := gek_toolbox.GetDownloadLink(repo, repoList)
 	if err != nil {
@@ -172,17 +181,26 @@ func downloadApp(repo string, repoList map[string]string) (err error) {
 // 处理应用下载文件
 func processApp(needExtract bool) (err error) {
 	// 如果不存在安装文件夹,则创建
-	exist, _, err := gek_file.Exist(installLocation)
-	if err != nil || !exist {
+	exist, _, _ := gek_file.Exist(installLocation)
+	if !exist {
 		err := gek_file.CreateDir(installLocation)
 		if err != nil {
 			return err
 		}
 	}
+	// 需要解压执行解压,不需要解压则执行改名移动
 	if needExtract {
 		err = gek_exec.Run(exec.Command("unzip", "-o", tempLocation+"*.zip", downloadFileName[1], "-d", installLocation))
 		if err != nil {
 			return err
+		}
+
+		// 如果解压出的文件名与目标文件名不相同则更改
+		if installLocation+downloadFileName[1] != installLocation+targetFileName {
+			err = gek_exec.Run(exec.Command("mv", installLocation+downloadFileName[1], installLocation+targetFileName))
+			if err != nil {
+				return err
+			}
 		}
 	} else {
 		err = gek_exec.Run(exec.Command("mv", tempLocation+downloadFileName[0], installLocation+targetFileName))
