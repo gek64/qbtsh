@@ -3,6 +3,7 @@ module qbtsh
 require (
 	gek_exec v0.0.0
 	gek_file v0.0.0
+	gek_github v0.0.0
 	gek_service v0.0.0
 	gek_toolbox v0.0.0
 )
