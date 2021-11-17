@@ -1,7 +1,5 @@
 module qbtsh
 
-go 1.16
-
 require (
 	gek_exec v0.0.0
 	gek_file v0.0.0

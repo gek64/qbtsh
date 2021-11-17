@@ -73,6 +73,13 @@ Example:
 	}
 }
 
+func showChangelog() {
+	var versionInfo = `Changelog:
+  1.00:
+    - First release`
+	fmt.Println(versionInfo)
+}
+
 func main() {
 	if cliInstall {
 		if cliEE {

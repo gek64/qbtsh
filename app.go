@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gek_exec"
 	"gek_file"
+	"gek_github"
 	"gek_service"
-	"gek_toolbox"
 	"os"
 	"os/exec"
 )
@@ -156,7 +156,7 @@ func downloadApp(repo string, repoList map[string]string) (err error) {
 	}
 
 	// 获取下载链接
-	downloadLink, err := gek_toolbox.GetDownloadLink(repo, repoList)
+	downloadLink, err := gek_github.GetDownloadLink(repo, repoList)
 	if err != nil {
 		return err
 	}
