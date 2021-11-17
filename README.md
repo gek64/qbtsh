@@ -1,5 +1,5 @@
 # qBittorrent Shell
-- Make qBittorrent-nox easier to install, uninstall and reload
+- Make qBittorrent-nox easier to install, uninstall and reload on linux
 - Written in golang 
 
 ## Usage
