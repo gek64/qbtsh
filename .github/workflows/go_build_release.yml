@@ -45,7 +45,10 @@ jobs:
 
           # 下载编译脚本并编译
           curl -LOJ https://github.com/gek64/build-apps-scripts/raw/main/gobuilder.sh
-          bash gobuilder.sh --main
+          bash gobuilder.sh --os linux --arch amd64
+          bash gobuilder.sh --os linux --arch 386
+          bash gobuilder.sh --os linux --arch arm64
+          bash gobuilder.sh --os linux --arch arm
 
           # 显示文件路径(debug)
           # ls .. -R -las
