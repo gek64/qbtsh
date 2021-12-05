@@ -62,7 +62,7 @@ Example:
 
 	// 打印版本信息
 	if cliVersion {
-		fmt.Println("v1.00")
+		fmt.Println("v1.01")
 		os.Exit(0)
 	}
 
@@ -76,7 +76,9 @@ Example:
 func showChangelog() {
 	var versionInfo = `Changelog:
   1.00:
-    - First release`
+    - First release
+  1.01:
+    - Now add aria2c,wget and build-in downloader support`
 	fmt.Println(versionInfo)
 }
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gek_downloader"
 	"gek_exec"
 	"gek_file"
 	"gek_github"
@@ -12,7 +13,7 @@ import (
 
 var (
 	// 工具链
-	toolbox = []string{"unzip", "curl", "systemctl", "systemd"}
+	toolbox = []string{"unzip", "systemctl", "systemd"}
 	// 应用安装目录
 	installLocation = "/usr/local/bin/"
 	// 应用下载文件存储的临时目录
@@ -165,10 +166,14 @@ func downloadApp(repo string, repoList map[string]string) (err error) {
 	if err != nil {
 		return err
 	}
+
 	// 下载文件到临时文件夹
-	err = gek_exec.Run("curl -LOJ " + downloadLink)
+	err = gek_downloader.ExternalDownloader(downloadLink)
 	if err != nil {
-		return err
+		err = gek_downloader.Downloader(downloadLink)
+		if err != nil {
+			return err
+		}
 	}
 	// cd 工作路径
 	err = os.Chdir(originDir)
