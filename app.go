@@ -137,11 +137,6 @@ func reload() (err error) {
 // 功能实现函数
 // 下载应用
 func downloadApp(repo string, repoList map[string]string) (err error) {
-	// 工作路径
-	originDir, err := os.Getwd()
-	if err != nil {
-		return err
-	}
 	// 建立临时文件夹
 	// 已经存在就删除重建
 	exist, _, _ := gek_file.Exist(tempLocation)
@@ -161,25 +156,13 @@ func downloadApp(repo string, repoList map[string]string) (err error) {
 	if err != nil {
 		return err
 	}
-	// cd 临时文件夹
-	err = os.Chdir(tempLocation)
+
+	// 下载文件到临时文件夹
+	err = gek_downloader.Downloader(downloadLink, tempLocation, "")
 	if err != nil {
 		return err
 	}
 
-	// 下载文件到临时文件夹
-	err = gek_downloader.ExternalDownloader(downloadLink)
-	if err != nil {
-		err = gek_downloader.Downloader(downloadLink)
-		if err != nil {
-			return err
-		}
-	}
-	// cd 工作路径
-	err = os.Chdir(originDir)
-	if err != nil {
-		return err
-	}
 	return nil
 }
 

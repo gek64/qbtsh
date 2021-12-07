@@ -19,4 +19,5 @@ replace (
 	gek_json => ../gek/gek_json
 	gek_service => ../gek/gek_service
 	gek_toolbox => ../gek/gek_toolbox
+	gek_math => ../gek/gek_math
 )
