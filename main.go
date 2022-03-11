@@ -13,17 +13,15 @@ var (
 	cliUninstall bool
 	cliUpdate    bool
 	cliReload    bool
-	cliEE        bool
 	cliHelp      bool
 	cliVersion   bool
 )
 
 func init() {
-	flag.BoolVar(&cliInstall, "I", false, "install")
-	flag.BoolVar(&cliUninstall, "R", false, "uninstall")
-	flag.BoolVar(&cliUpdate, "U", false, "update")
-	flag.BoolVar(&cliReload, "r", false, "reload")
-	flag.BoolVar(&cliEE, "ee", false, "choose qBittorrent-nox enhanced edition")
+	flag.BoolVar(&cliInstall, "install", false, "install")
+	flag.BoolVar(&cliUninstall, "uninstall", false, "uninstall")
+	flag.BoolVar(&cliUpdate, "update", false, "update")
+	flag.BoolVar(&cliReload, "reload", false, "reload")
 	flag.BoolVar(&cliHelp, "h", false, "show help")
 	flag.BoolVar(&cliVersion, "v", false, "show version")
 	flag.Parse()
@@ -31,26 +29,21 @@ func init() {
 	// 重写显示用法函数
 	flag.Usage = func() {
 		var helpInfo = `Usage:
-    qbtsh [Options] [Commands]
-
-Options:
-    -ee   : Choose qBittorrent-nox enhanced edition
+    qbtsh [Commands]
 
 Command:
-    -I    : Install
-    -R    : Uninstall
-    -U    : Update
-    -r    : Reload
-    -h    : Show help
-    -v    : Show version
+    -install    : Install
+    -uninstall  : Uninstall
+    -update     : Update
+    -reload     : Reload
+    -h          : Show help
+    -v          : Show version
 
 Example:
-    1) qbtsh -I      : Install default qBittorrent-nox
-    2) qbtsh -ee -I  : Install qBittorrent-nox enhanced edition
-    3) qbtsh -U      : Update default qBittorrent-nox
-    4) qbtsh -ee -U  : Update qBittorrent-nox enhanced edition
-    5) qbtsh -R      : Remove cache and uninstall qBittorrent-nox
-    6) qbtsh -r      : Reload service`
+    1) qbtsh -install     : Install qBittorrent-nox
+    3) qbtsh -update      : Update qBittorrent-nox
+    5) qbtsh -uninstall   : Remove config,cache and uninstall qBittorrent-nox
+    6) qbtsh -reload      : Reload service`
 		fmt.Println(helpInfo)
 	}
 
@@ -62,13 +55,19 @@ Example:
 
 	// 打印版本信息
 	if cliVersion {
-		fmt.Println("v1.02")
+		fmt.Println("v1.03")
 		os.Exit(0)
 	}
 
 	// 检查运行库是否完整
 	err := gek_toolbox.CheckToolbox(toolbox)
 	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = initNetwork()
+	if err != nil {
+		fmt.Println("init fail")
 		log.Fatal(err)
 	}
 }
@@ -80,47 +79,36 @@ func showChangelog() {
   1.01:
     - Now add aria2c,wget and build-in downloader support
   1.02:
-    - Rewrite download function`
+    - Rewrite download function
+  1.03:
+    - Rewrite all code
+    - Fix the description in the error message`
 	fmt.Println(versionInfo)
 }
 
 func main() {
 	if cliInstall {
-		if cliEE {
-			err := install(qbteeRepo, qbteeList, true)
-			if err != nil {
-				log.Fatal(err)
-			}
-		} else {
-			err := install(qbtRepo, qbtList, false)
-			if err != nil {
-				log.Fatal(err)
-			}
+		err := install()
+		if err != nil {
+			log.Panicln(err)
 		}
 	}
 	if cliUpdate {
-		if cliEE {
-			err := update(qbteeRepo, qbteeList, true)
-			if err != nil {
-				log.Fatal(err)
-			}
-		} else {
-			err := update(qbtRepo, qbtList, false)
-			if err != nil {
-				log.Fatal(err)
-			}
+		err := update()
+		if err != nil {
+			log.Panicln(err)
 		}
 	}
 	if cliUninstall {
 		err := uninstall()
 		if err != nil {
-			log.Println(err)
+			log.Panicln(err)
 		}
 	}
 	if cliReload {
 		err := reload()
 		if err != nil {
-			log.Println(err)
+			log.Panicln(err)
 		}
 	}
 }
