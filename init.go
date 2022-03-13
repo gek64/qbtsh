@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gek_app"
 	"runtime"
 )
@@ -12,27 +11,43 @@ var (
 	service     gek_app.Service
 	tempFolder  string = "/tmp/qbt_installer"
 	needExtract bool   = false
+	cc          CC
 )
 
-func initNetwork() (err error) {
+func initApp() (err error) {
 	var a = &app
 	var c = &config
 	var s = &service
 
+	err = initConf()
+	if err != nil {
+		return err
+	}
+
+	// 应用初始化
+
+	*a, err = gek_app.NewApplicationFromGithub(cc.Application.File, cc.Application.Repo, cc.Application.RepoList, cc.Application.Location, cc.Application.UninstallDeleteLocation, tempFolder)
+	if err != nil {
+		return err
+	}
+
+	// 配置初始化
+	*c = gek_app.NewConfig("", "", cc.Config.Location, cc.Config.UninstallDeleteLocation)
+
+	// 服务初始化
 	switch runtime.GOOS {
 	case gek_app.SupportedOS[0]:
-		// 应用初始化
-		*a, err = gek_app.NewApplicationFromGithub(bins, repo, repoList, binsLocation, binUninstallDeleteLocationFolder, tempFolder)
+		bytes, err := container.ReadFile("service/qbittorrent.service")
 		if err != nil {
 			return err
 		}
-		// 配置初始化
-		*c = gek_app.NewConfig(configName, configContent, configLocation, configUninstallDeleteLocationFolder)
-
-		// 服务初始化
-		*s = gek_app.NewService(serviceName, serviceContent)
-	default:
-		return fmt.Errorf("unsupported os %s", runtime.GOOS)
+		*s = gek_app.NewService(cc.Service.Name, string(bytes))
+	case gek_app.SupportedOS[1]:
+		bytes, err := container.ReadFile("service/qbittorrent")
+		if err != nil {
+			return err
+		}
+		*s = gek_app.NewService(cc.Service.Name, string(bytes))
 	}
 
 	return nil

@@ -3,9 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"gek_app"
 	"gek_toolbox"
 	"log"
 	"os"
+	"runtime"
 )
 
 var (
@@ -55,20 +57,25 @@ Example:
 
 	// 打印版本信息
 	if cliVersion {
-		fmt.Println("v1.03")
+		fmt.Println("v1.04")
 		os.Exit(0)
 	}
 
-	// 检查运行库是否完整
-	err := gek_toolbox.CheckToolbox(toolbox)
+	// 初始化
+	err := initApp()
 	if err != nil {
-		log.Fatal(err)
+		log.Panicln(err)
 	}
 
-	err = initNetwork()
-	if err != nil {
-		fmt.Println("init fail")
-		log.Fatal(err)
+	// 检查运行库是否完整
+	switch runtime.GOOS {
+	case gek_app.SupportedOS[0]:
+		err := gek_toolbox.CheckToolbox(cc.Toolbox)
+		if err != nil {
+			log.Panicln(err)
+		}
+	default:
+		log.Panicf("%s is not supported", runtime.GOOS)
 	}
 }
 
@@ -82,7 +89,9 @@ func showChangelog() {
     - Rewrite download function
   1.03:
     - Rewrite all code
-    - Fix the description in the error message`
+    - Fix the description in the error message
+  1.04:
+    - Embedded configuration file and service file`
 	fmt.Println(versionInfo)
 }
 

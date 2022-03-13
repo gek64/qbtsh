@@ -1,44 +1,50 @@
 package main
 
-var (
-	// 工具链
-	toolbox = []string{"service", "systemd"}
-
-	// 应用相关
-	repo     = "userdocs/qbittorrent-nox-static"
-	repoList = map[string]string{
-		"linux_amd64": "x86_64-qbittorrent-nox",
-		"linux_arm":   "armv7-qbittorrent-nox",
-		"linux_arm64": "aarch64-qbittorrent-nox",
-	}
-	bins                             = []string{"qbittorrent-nox"}
-	binsLocation                     = "/usr/local/bin"
-	binNeedExtract                   = false
-	binUninstallDeleteLocationFolder = false
-
-	// 配置文件相关
-	configName                          = ""
-	configContent                       = ""
-	configLocation                      = "/usr/local/etc/qBittorrent"
-	configUninstallDeleteLocationFolder = true
-
-	// 服务相关
-	serviceName    = "qbittorrent.service"
-	serviceContent = `# nano /etc/systemd/system/qbittorrent.service
-# systemctl enable qbittorrent && systemctl start qbittorrent
-
-[Unit]
-Description=qBittorrent Daemon Service
-Wants=network-online.target
-After=network-online.target nss-lookup.target
-
-[Service]
-Type=exec
-User=root
-ExecStart=/usr/local/bin/qbittorrent-nox --profile="/usr/local/etc/"
-Restart=on-failure
-SyslogIdentifier=qbittorrent
-
-[Install]
-WantedBy=multi-user.target`
+import (
+	"embed"
+	"encoding/json"
+	"gek_app"
+	"runtime"
 )
+
+type CC struct {
+	Toolbox     []string    `json:"toolbox"`
+	Application Application `json:"application"`
+	Config      Config      `json:"config"`
+	Service     Service     `json:"service"`
+}
+
+type Application struct {
+	Repo                    string            `json:"repo"`
+	RepoList                map[string]string `json:"repoList"`
+	File                    []string          `json:"file"`
+	Location                string            `json:"location"`
+	UninstallDeleteLocation bool              `json:"uninstallDeleteLocation"`
+}
+type Config struct {
+	Location                string `json:"location"`
+	UninstallDeleteLocation bool   `json:"uninstallDeleteLocation"`
+}
+type Service struct {
+	Name    string `json:"name"`
+	Content string `json:"content"`
+}
+
+// 存储配置文件及服务文件
+//go:embed config/* service/*
+var container embed.FS
+
+func initConf() (err error) {
+	switch runtime.GOOS {
+	case gek_app.SupportedOS[0]:
+		bytes, err := container.ReadFile("config/linux.json")
+		if err != nil {
+			return err
+		}
+		err = json.Unmarshal(bytes, &cc)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

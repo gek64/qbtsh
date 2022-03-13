@@ -1,0 +1,17 @@
+# nano /etc/systemd/system/qbittorrent.service
+# systemctl enable qbittorrent && systemctl start qbittorrent
+
+[Unit]
+Description=qBittorrent Daemon Service
+Wants=network-online.target
+After=network-online.target nss-lookup.target
+
+[Service]
+Type=exec
+User=root
+ExecStart=/usr/local/bin/qbittorrent-nox --profile="/usr/local/etc/"
+Restart=on-failure
+SyslogIdentifier=qbittorrent
+
+[Install]
+WantedBy=multi-user.target
