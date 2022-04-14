@@ -42,5 +42,5 @@ go build -v -trimpath -ldflags "-s -w"
 A: [userdocs/qbittorrent-nox-static](https://github.com/userdocs/qbittorrent-nox-static/releases) only support linux, and it is also hard to build a full static qBittorrent-nox for FreeBSD, you can use my dynamic [freebsd build](https://github.com/gek64/qbittorrent-nox).
 
 ## License
-- **GNU Lesser General Public License v2.1**
+- **GPL-3.0 License**
 - See `LICENSE` for details
