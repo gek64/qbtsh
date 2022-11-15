@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gek_app"
-	"gek_toolbox"
+	"github.com/gek64/gek/gApp"
+	"github.com/gek64/gek/gToolbox"
 	"log"
 	"os"
 	"runtime"
@@ -69,8 +69,8 @@ Example:
 
 	// 检查运行库是否完整
 	switch runtime.GOOS {
-	case gek_app.SupportedOS[0]:
-		err := gek_toolbox.CheckToolbox(cc.Toolbox)
+	case gApp.SupportedOS[0]:
+		err := gToolbox.CheckToolbox(cc.Toolbox)
 		if err != nil {
 			log.Panicln(err)
 		}
