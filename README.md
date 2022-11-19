@@ -46,8 +46,6 @@ chmod +x /usr/local/bin/qbtsh
 
 ## Compile
 ```sh
-# Download the source code of dependent packages
-git clone https://github.com/gek64/gek.git
 # Download application source code
 git clone https://github.com/gek64/qbtsh.git
 # Compile the source code
