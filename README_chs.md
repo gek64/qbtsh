@@ -45,8 +45,6 @@ chmod +x /usr/local/bin/qbtsh
 
 ## 编译说明
 ```sh
-# 下载依赖包源代码
-git clone https://github.com/gek64/gek.git
 # 下载应用源代码
 git clone https://github.com/gek64/qbtsh.git
 # 编译源代码
