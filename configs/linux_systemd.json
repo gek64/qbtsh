@@ -1,0 +1,26 @@
+{
+  "toolbox": [
+    "systemd"
+  ],
+  "application": {
+    "repo": "userdocs/qbittorrent-nox-static",
+    "repoList": {
+      "linux_amd64": "x86_64-qbittorrent-nox",
+      "linux_arm": "armv7-qbittorrent-nox",
+      "linux_arm64": "aarch64-qbittorrent-nox"
+    },
+    "file": [
+      "qbittorrent-nox"
+    ],
+    "location": "/usr/local/bin",
+    "uninstallDeleteLocation": false
+  },
+  "config": {
+    "location": "/usr/local/etc/qBittorrent",
+    "uninstallDeleteLocation": true
+  },
+  "service": {
+    "name": "qbittorrent.service",
+    "content": ""
+  }
+}

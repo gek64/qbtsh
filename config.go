@@ -3,6 +3,7 @@ package main
 import (
     "embed"
     "encoding/json"
+    "fmt"
     "github.com/gek64/gek/gApp"
     "runtime"
 )
@@ -36,16 +37,49 @@ type Service struct {
 var container embed.FS
 
 func initConf() (err error) {
+    var configBytes []byte
+    var configPath string
+
+    // 检查系统中的init system
+    _, initSystemBin := gApp.CheckInitSystem()
+
     switch runtime.GOOS {
     case gApp.SupportedOS[0]:
-        bytes, err := container.ReadFile("configs/linux.json")
-        if err != nil {
-            return err
+        switch initSystemBin {
+        case gApp.InitSystem["systemd"]:
+            configPath = "configs/linux_systemd.json"
+        case gApp.InitSystem["openrc"]:
+            configPath = "configs/linux_openrc.json"
+        default:
+            var supportInitSystemListString string
+            for key := range gApp.InitSystem {
+                supportInitSystemListString = supportInitSystemListString + ", " + key
+            }
+            return fmt.Errorf("no supported init system found, currently only %s are supported", supportInitSystemListString)
         }
-        err = json.Unmarshal(bytes, &cc)
-        if err != nil {
-            return err
+    case gApp.SupportedOS[1]:
+        switch initSystemBin {
+        case gApp.InitSystem["rc.d"]:
+            configPath = "configs/freebsd_rcd.json"
+            return fmt.Errorf("freebsd does not yet support")
+        default:
+            var supportInitSystemListString string
+            for key := range gApp.InitSystem {
+                supportInitSystemListString = supportInitSystemListString + ", " + key
+            }
+            return fmt.Errorf("no supported init system found, currently only %s are supported", supportInitSystemListString)
         }
     }
+
+    configBytes, err = container.ReadFile(configPath)
+    if err != nil {
+        return err
+    }
+
+    err = json.Unmarshal(configBytes, &cc)
+    if err != nil {
+        return err
+    }
+
     return nil
 }

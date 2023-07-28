@@ -1,7 +1,6 @@
 {
   "toolbox": [
-    "service",
-    "systemd"
+    "openrc"
   ],
   "application": {
     "repo": "userdocs/qbittorrent-nox-static",
@@ -21,7 +20,7 @@
     "uninstallDeleteLocation": true
   },
   "service": {
-    "name": "qbittorrent.service",
+    "name": "qbittorrent",
     "content": ""
   }
 }

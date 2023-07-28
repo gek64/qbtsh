@@ -57,7 +57,7 @@ Example:
 
     // 打印版本信息
     if cliVersion {
-        fmt.Println("v1.05")
+        fmt.Println("v1.06")
         os.Exit(0)
     }
 
@@ -91,7 +91,9 @@ func showChangelog() {
     - Rewrite all code
     - Fix the description in the error message
   1.04:
-    - Embedded configuration file and service file`
+    - Embedded configuration file and service file
+  1.05:
+    - Support openrc init system`
     fmt.Println(versionInfo)
 }
 
