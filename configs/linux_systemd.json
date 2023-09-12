@@ -1,6 +1,6 @@
 {
   "toolbox": [
-    "systemd"
+    "systemctl"
   ],
   "application": {
     "repo": "userdocs/qbittorrent-nox-static",
