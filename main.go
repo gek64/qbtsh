@@ -26,11 +26,11 @@ func main() {
 			Aliases: []string{"u"},
 			Usage:   "Remove config,cache and uninstall qBittorrent-nox",
 			Action: func(ctx *cli.Context) (err error) {
-				err = uninstallBinaryFile()
+				err = uninstallService()
 				if err != nil {
 					return err
 				}
-				return uninstallService()
+				return uninstallBinaryFile()
 			},
 		},
 		{

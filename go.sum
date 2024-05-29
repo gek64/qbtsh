@@ -5,6 +5,8 @@ github.com/gek64/gek v1.1.2-0.20240529020438-1f06ac1c9313 h1:KIq88bWnvw99uhJjCy/
 github.com/gek64/gek v1.1.2-0.20240529020438-1f06ac1c9313/go.mod h1:WsQ8yfpWiMcD0HpxRlR7WNH2jrFgf5IvQYXmrGAIB0w=
 github.com/gek64/gek v1.1.2-0.20240529032421-48c4a4c6614e h1:GKeoLPf7t2hw5K2mHYPVDasomBj38BZKKy+j3yOvMkQ=
 github.com/gek64/gek v1.1.2-0.20240529032421-48c4a4c6614e/go.mod h1:WsQ8yfpWiMcD0HpxRlR7WNH2jrFgf5IvQYXmrGAIB0w=
+github.com/gek64/gek v1.1.2-0.20240529074043-bbbba49b9a18 h1:apE1A54sCrAtMeGPh8PeRTG5MO/z4/GbFX9Txx8MFvw=
+github.com/gek64/gek v1.1.2-0.20240529074043-bbbba49b9a18/go.mod h1:WsQ8yfpWiMcD0HpxRlR7WNH2jrFgf5IvQYXmrGAIB0w=
 github.com/russross/blackfriday/v2 v2.1.0 h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/urfave/cli/v2 v2.27.2 h1:6e0H+AkS+zDckwPCUrZkKX38mRaau4nL2uipkJpbkcI=

@@ -34,7 +34,7 @@ func installService() (err error) {
 	if err != nil {
 		return err
 	}
-	// 服务自启动+启动服务
+	// 服务启动,开启自启
 	return service.Load()
 }
 
@@ -57,7 +57,12 @@ func uninstallService() (err error) {
 	if err != nil {
 		return err
 	}
-	// 服务unload+卸载
+	// 服务停止,关闭自启
+	err = service.Unload()
+	if err != nil {
+		return err
+	}
+	// 服务卸载
 	return service.Uninstall()
 }
 
@@ -72,12 +77,18 @@ func updateBinaryFile() (err error) {
 	if err != nil {
 		return err
 	}
-	// 停止服务
+	// 服务停止,关闭自启
 	err = service.Unload()
 	if err != nil {
 		return err
 	}
-	return installBinaryFile()
+	// 执行新的二进制文件安装
+	err = installBinaryFile()
+	if err != nil {
+		return err
+	}
+	// 服务启动,开启自启
+	return service.Load()
 }
 
 func updateService() (err error) {
@@ -91,17 +102,17 @@ func updateService() (err error) {
 	if err != nil {
 		return err
 	}
-	// 服务卸载
-	err = service.Uninstall()
+	// 服务停止,关闭自启
+	err = service.Unload()
 	if err != nil {
 		return err
 	}
-	// 服务安装
+	// 新的服务安装
 	err = service.Install()
 	if err != nil {
 		return err
 	}
-	// 服务自启动+启动服务
+	// 服务启动,开启自启
 	return service.Load()
 }
 
