@@ -12,7 +12,7 @@ func main() {
 		{
 			Name:    "install",
 			Aliases: []string{"i"},
-			Usage:   "Install qBittorrent-nox",
+			Usage:   "Install qBittorrent",
 			Action: func(ctx *cli.Context) (err error) {
 				err = installBinaryFile()
 				if err != nil {
@@ -24,7 +24,7 @@ func main() {
 		{
 			Name:    "uninstall",
 			Aliases: []string{"u"},
-			Usage:   "Remove config,cache and uninstall qBittorrent-nox",
+			Usage:   "Remove config,cache and uninstall qBittorrent",
 			Action: func(ctx *cli.Context) (err error) {
 				err = uninstallService()
 				if err != nil {
@@ -36,7 +36,7 @@ func main() {
 		{
 			Name:    "update",
 			Aliases: []string{"up"},
-			Usage:   "Update qBittorrent-nox",
+			Usage:   "Update qBittorrent",
 			Action: func(ctx *cli.Context) (err error) {
 				err = updateBinaryFile()
 				if err != nil {
@@ -61,7 +61,7 @@ func main() {
 	}
 
 	app := &cli.App{
-		Usage:    "qBittorrent-nox quick install tool",
+		Usage:    "qBittorrent quick install tool",
 		Version:  "v2.00",
 		Commands: cmds,
 	}

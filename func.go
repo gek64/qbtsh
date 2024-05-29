@@ -11,11 +11,11 @@ func installBinaryFile() (err error) {
 	if err != nil {
 		return err
 	}
-	err = gDownloader.Download(downloadURL, "/usr/local/bin/qbittorrent-nox", "")
+	err = gDownloader.Download(downloadURL, "/usr/local/bin/qbittorrent", "")
 	if err != nil {
 		return err
 	}
-	return os.Chmod("/usr/local/bin/qbittorrent-nox", 0755)
+	return os.Chmod("/usr/local/bin/qbittorrent", 0755)
 }
 
 func installService() (err error) {
@@ -25,7 +25,7 @@ func installService() (err error) {
 		return err
 	}
 	// 初始化服务
-	service, err := gApp.NewService(initSystem, "qbittorrent-nox.service", serviceContent)
+	service, err := gApp.NewService(initSystem, "qbittorrent.service", serviceContent)
 	if err != nil {
 		return err
 	}
@@ -43,7 +43,7 @@ func uninstallBinaryFile() (err error) {
 	if err != nil {
 		return err
 	}
-	return os.RemoveAll("/usr/local/bin/qbittorrent-nox")
+	return os.RemoveAll("/usr/local/bin/qbittorrent")
 }
 
 func uninstallService() (err error) {
@@ -53,7 +53,7 @@ func uninstallService() (err error) {
 		return err
 	}
 	// 初始化服务
-	service, err := gApp.NewService(initSystem, "qbittorrent-nox.service", serviceContent)
+	service, err := gApp.NewService(initSystem, "qbittorrent.service", serviceContent)
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func updateBinaryFile() (err error) {
 		return err
 	}
 	// 初始化服务
-	service, err := gApp.NewService(initSystem, "qbittorrent-nox.service", serviceContent)
+	service, err := gApp.NewService(initSystem, "qbittorrent.service", serviceContent)
 	if err != nil {
 		return err
 	}
@@ -98,7 +98,7 @@ func updateService() (err error) {
 		return err
 	}
 	// 初始化服务
-	service, err := gApp.NewService(initSystem, "qbittorrent-nox.service", serviceContent)
+	service, err := gApp.NewService(initSystem, "qbittorrent.service", serviceContent)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func reloadService() (err error) {
 		return err
 	}
 	// 初始化服务
-	service, err := gApp.NewService(initSystem, "qbittorrent-nox.service", serviceContent)
+	service, err := gApp.NewService(initSystem, "qbittorrent.service", serviceContent)
 	if err != nil {
 		return err
 	}
