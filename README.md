@@ -14,9 +14,7 @@
 [中文说明](https://github.com/gek64/qbtsh/blob/main/README_chs.md)
 
 - Make `qBittorrent-nox` easier to install, uninstall and reload on `Linux` kernel system.
-- Using an application installation framework [gek_app](https://github.com/gek64/gek/tree/main/gek_app) written by
-  myself, when writing this application, according to the idea of separating system files from third-party software
-  files, the application is installed in `/usr/local/bin/qbittorrent-nox`, and the application data is stored
+- The application is installed in `/usr/local/bin/qbittorrent-nox`, and the application data is stored
   in `/usr/local/etc/qBittorrent/` to avoid problems caused by future system changes.
 - Statically compiled `qBittorrent-nox`
   using [userdocs/qbittorrent-nox-static](https://github.com/userdocs/qbittorrent-nox-static/releases)
@@ -84,7 +82,7 @@ go build -v -trimpath -ldflags "-s -w"
 ### How to access after running?
 
 - After the service runs successfully, you can access it at `SERVER_IP:8080`. The default user name is `admin`, and the
-  default password is `adminadmin`. Although you can use it normally at this time, I still recommend you to change the
+  default password can be found in service log. Although you can use it normally at this time, I still recommend you to change the
   password in time and use reverse proxy under the web server such as `apache` or `nginx` with `https` enabled, then
   change the listening address of `qBittorrent-nox` from `0.0.0.0` to `127.0.0.1` to improve security.
 
