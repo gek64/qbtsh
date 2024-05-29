@@ -63,7 +63,7 @@ jobs:
           
           # 批量编译
           go mod tidy
-          "${{ github.workspace }}/gobd_runner" -main -d bin -no_debug -no_cgo
+          "${{ github.workspace }}/gobd_runner" -os linux -d bin -no_debug -no_cgo
           "${{ github.workspace }}/gobd_runner" -os linux -arch mipsle -n ${{ github.event.repository.name }}-softfloat -d bin -no_debug -no_cgo -envs 'GOMIPS=softfloat'
 
           # 获取sha256 checksum
