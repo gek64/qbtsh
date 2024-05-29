@@ -91,7 +91,7 @@ func updateService() (err error) {
 	if err != nil {
 		return err
 	}
-	// 服务unload+卸载
+	// 服务卸载
 	err = service.Uninstall()
 	if err != nil {
 		return err
