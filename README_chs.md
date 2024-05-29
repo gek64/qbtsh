@@ -21,20 +21,25 @@
 ## 使用说明
 
 ```
-使用说明:
-    qbtsh [指令]
-指令:
-    -install    : 安装
-    -uninstall  : 卸载
-    -update     : 升级
-    -reload     : 重载
-    -h          : 显示帮助
-    -v          : 显示版本
-实例:
-    1) qbtsh -install     : 安装 qBittorrent-nox
-    3) qbtsh -update      : 升级 qBittorrent-nox
-    5) qbtsh -uninstall   : 卸载 qBittorrent-nox，并移除应用配置文件及应用缓存
-    6) qbtsh -reload      : 重载服务
+NAME:
+   qbtsh.exe - qBittorrent-nox quick install tool
+
+USAGE:
+   qbtsh.exe [global options] command
+
+VERSION:
+   v2.00
+
+COMMANDS:
+   install, i    Install qBittorrent-nox
+   uninstall, u  Remove config,cache and uninstall qBittorrent-nox
+   update, up    Update qBittorrent-nox
+   reload, r     Reload service
+   help, h       Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
 ```
 
 ## 安装说明
@@ -56,6 +61,7 @@ chmod +x /usr/local/bin/qbtsh
 git clone https://github.com/gek64/qbtsh.git
 # 编译源代码
 cd qbtsh
+export CGO_ENABLED=0
 go build -v -trimpath -ldflags "-s -w"
 ```
 

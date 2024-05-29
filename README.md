@@ -24,20 +24,25 @@
 ## Usage
 
 ```
-Usage:
-    qbtsh [Commands]
-Command:
-    -install    : Install
-    -uninstall  : Uninstall
-    -update     : Update
-    -reload     : Reload
-    -h          : Show help
-    -v          : Show version
-Example:
-    1) qbtsh -install     : Install qBittorrent-nox
-    3) qbtsh -update      : Update qBittorrent-nox
-    5) qbtsh -uninstall   : Remove config,cache and uninstall qBittorrent-nox
-    6) qbtsh -reload      : Reload service
+NAME:
+   qbtsh.exe - qBittorrent-nox quick install tool
+
+USAGE:
+   qbtsh.exe [global options] command
+
+VERSION:
+   v2.00
+
+COMMANDS:
+   install, i    Install qBittorrent-nox
+   uninstall, u  Remove config,cache and uninstall qBittorrent-nox
+   update, up    Update qBittorrent-nox
+   reload, r     Reload service
+   help, h       Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
 ```
 
 ## Install
@@ -59,6 +64,7 @@ chmod +x /usr/local/bin/qbtsh
 git clone https://github.com/gek64/qbtsh.git
 # Compile the source code
 cd qbtsh
+export CGO_ENABLED=0
 go build -v -trimpath -ldflags "-s -w"
 ```
 
