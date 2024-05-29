@@ -11,11 +11,11 @@ func installBinaryFile() (err error) {
 	if err != nil {
 		return err
 	}
-	err = gDownloader.Download(downloadURL, "/usr/local/bin/qbittorrent", "")
+	err = gDownloader.Download(downloadURL, "/usr/local/bin/qbittorrent-nox", "")
 	if err != nil {
 		return err
 	}
-	return os.Chmod("/usr/local/bin/qbittorrent", 0755)
+	return os.Chmod("/usr/local/bin/qbittorrent-nox", 0755)
 }
 
 func installService() (err error) {
