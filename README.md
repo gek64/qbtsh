@@ -83,7 +83,7 @@ go build -v -trimpath -ldflags "-s -w"
 
 - After the service runs successfully, you can access it at `SERVER_IP:8080`. The default user name is `admin`, and the
   default password can be found in service log. Although you can use it normally at this time, I still recommend you to change the
-  password in time and use reverse proxy under the web server such as `apache` or `nginx` with `https` enabled, then
+  password in time, use reverse proxy that provided by `apache` or `nginx` and enable `https`, then
   change the listening address of `qBittorrent-nox` from `0.0.0.0` to `127.0.0.1` to improve security.
 
 ## License
