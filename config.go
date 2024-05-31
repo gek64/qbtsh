@@ -8,7 +8,7 @@ import (
 	"runtime"
 )
 
-//go:embed service/*
+//go:embed configs/*
 var container embed.FS
 
 func GetDownloadURL() (downloadURL string, err error) {
@@ -32,19 +32,19 @@ func GetService() (initSystem string, serviceContent []byte, err error) {
 	// systemd
 	_, err = exec.LookPath("systemctl")
 	if err == nil {
-		serviceFile = "service/qbittorrent.service"
+		serviceFile = "configs/qbittorrent.service"
 		initSystem = "systemd"
 	}
 	// alpine openrc
 	_, err = exec.LookPath("openrc")
 	if err == nil {
-		serviceFile = "service/qbittorrent.openrc"
+		serviceFile = "configs/qbittorrent.openrc"
 		initSystem = "openrc"
 	}
 	// freebsd rc.d
 	_, err = exec.LookPath("rcorder")
 	if err == nil {
-		serviceFile = "service/qbittorrent.rcd"
+		serviceFile = "configs/qbittorrent.rcd"
 		initSystem = "rc.d"
 	}
 

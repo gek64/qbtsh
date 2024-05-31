@@ -23,20 +23,20 @@
 
 ```
 NAME:
-   qbtsh.exe - qBittorrent-nox quick install tool
+   qbtsh.exe - qBittorrent quick install tool
 
 USAGE:
-   qbtsh.exe [global options] command
+   qbtsh.exe [global options] command [command options] 
 
 VERSION:
    v2.00
 
 COMMANDS:
-   install, i    Install qBittorrent-nox
-   uninstall, u  Remove config,cache and uninstall qBittorrent-nox
-   update, up    Update qBittorrent-nox
-   reload, r     Reload service
-   help, h       Shows a list of commands or help for one command
+   install, i  Install qBittorrent
+   uninstall   Remove config,cache and uninstall qBittorrent
+   update      Update qBittorrent
+   reload      Reload service
+   help, h     Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --help, -h     show help
@@ -82,7 +82,8 @@ go build -v -trimpath -ldflags "-s -w"
 ### How to access after running?
 
 - After the service runs successfully, you can access it at `SERVER_IP:8080`. The default user name is `admin`, and the
-  default password can be found in service log. Although you can use it normally at this time, I still recommend you to change the
+  default password can be found in service log. Although you can use it normally at this time, I still recommend you to
+  change the
   password in time, use reverse proxy that provided by `apache` or `nginx` and enable `https`, then
   change the listening address of `qBittorrent-nox` from `0.0.0.0` to `127.0.0.1` to improve security.
 

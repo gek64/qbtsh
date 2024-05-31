@@ -22,9 +22,8 @@ func main() {
 			},
 		},
 		{
-			Name:    "uninstall",
-			Aliases: []string{"u"},
-			Usage:   "Remove config,cache and uninstall qBittorrent",
+			Name:  "uninstall",
+			Usage: "Remove config,cache and uninstall qBittorrent",
 			Action: func(ctx *cli.Context) (err error) {
 				err = uninstallService()
 				if err != nil {
@@ -34,9 +33,8 @@ func main() {
 			},
 		},
 		{
-			Name:    "update",
-			Aliases: []string{"up"},
-			Usage:   "Update qBittorrent",
+			Name:  "update",
+			Usage: "Update qBittorrent",
 			Action: func(ctx *cli.Context) (err error) {
 				err = updateBinaryFile()
 				if err != nil {
@@ -46,9 +44,8 @@ func main() {
 			},
 		},
 		{
-			Name:    "reload",
-			Aliases: []string{"r"},
-			Usage:   "Reload service",
+			Name:  "reload",
+			Usage: "Reload service",
 			Action: func(ctx *cli.Context) (err error) {
 				return reloadService()
 			},
