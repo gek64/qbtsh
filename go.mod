@@ -1,9 +1,9 @@
 module qbtsh
 
-go 1.22.3
+go 1.23.2
 
 require (
-	github.com/gek64/gek v1.1.3-0.20240627090940-b552e88adf02
+	github.com/gek64/gek v1.1.4
 	github.com/urfave/cli/v2 v2.27.5
 )
 
