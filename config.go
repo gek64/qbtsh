@@ -11,9 +11,16 @@ import (
 //go:embed configs/*
 var container embed.FS
 
-func GetDownloadURL() (downloadURL string, err error) {
-	baseURL := "https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/"
-	assetName := ""
+func GetDownloadURL(tagName string) (downloadURL string, err error) {
+	var baseURL = ""
+	var assetName = ""
+
+	if tagName != "" {
+		baseURL = "https://github.com/userdocs/qbittorrent-nox-static/releases/download/" + tagName + "/"
+	} else {
+		baseURL = "https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/"
+	}
+
 	switch runtime.GOARCH {
 	case "amd64":
 		assetName = "x86_64-qbittorrent-nox"

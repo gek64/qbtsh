@@ -8,13 +8,23 @@ import (
 )
 
 func main() {
+	var tagName string
+
 	cmds := []*cli.Command{
 		{
 			Name:    "install",
 			Aliases: []string{"i"},
 			Usage:   "Install qBittorrent",
+			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:        "tag",
+					Aliases:     []string{"t"},
+					Usage:       "set qBittorrent tag name",
+					Destination: &tagName,
+				},
+			},
 			Action: func(ctx *cli.Context) (err error) {
-				err = installBinaryFile()
+				err = installBinaryFile(tagName)
 				if err != nil {
 					return err
 				}
@@ -35,8 +45,16 @@ func main() {
 		{
 			Name:  "update",
 			Usage: "Update qBittorrent",
+			Flags: []cli.Flag{
+				&cli.StringFlag{
+					Name:        "tag",
+					Aliases:     []string{"t"},
+					Usage:       "set qBittorrent tag name",
+					Destination: &tagName,
+				},
+			},
 			Action: func(ctx *cli.Context) (err error) {
-				err = updateBinaryFile()
+				err = updateBinaryFile(tagName)
 				if err != nil {
 					return err
 				}
@@ -59,7 +77,7 @@ func main() {
 
 	app := &cli.App{
 		Usage:    "qBittorrent quick install tool",
-		Version:  "v2.00",
+		Version:  "v2.01",
 		Commands: cmds,
 	}
 

@@ -6,8 +6,8 @@ import (
 	"os"
 )
 
-func installBinaryFile() (err error) {
-	downloadURL, err := GetDownloadURL()
+func installBinaryFile(tagName string) (err error) {
+	downloadURL, err := GetDownloadURL(tagName)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func uninstallService() (err error) {
 	return service.Uninstall()
 }
 
-func updateBinaryFile() (err error) {
+func updateBinaryFile(tagName string) (err error) {
 	// 获取初始化系统名字,对应的服务内容
 	initSystem, serviceContent, err := GetService()
 	if err != nil {
@@ -83,7 +83,7 @@ func updateBinaryFile() (err error) {
 		return err
 	}
 	// 执行新的二进制文件安装
-	err = installBinaryFile()
+	err = installBinaryFile(tagName)
 	if err != nil {
 		return err
 	}
